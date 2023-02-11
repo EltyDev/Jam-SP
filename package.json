@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "adm-zip": "^0.5.10",
-    "api": "^5.0.7"
+    "puppeteer": "^19.6.3",
+    "selenium-webdriver": "^4.8.0"
   }
 }
