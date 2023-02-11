@@ -1,0 +1,25 @@
+{
+  "name": "jam-sp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "electron src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Venodez/Jam-SP.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Venodez/Jam-SP/issues"
+  },
+  "homepage": "https://github.com/Venodez/Jam-SP#readme",
+  "devDependencies": {
+    "electron": "^23.0.0"
+  },
+  "dependencies": {
+    "api": "^5.0.7"
+  }
+}
