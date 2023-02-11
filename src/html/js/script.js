@@ -3,6 +3,7 @@ const fs = require('fs');
 const puppeteer = require('puppeteer');
 
 let viruses = [];
+let nbFiles = 0;
 let browser;
 let page;
 
@@ -48,7 +49,7 @@ const deleteVirues = () => {
 const input = document.getElementById('folder');
 
 input.addEventListener('change', async (event) => {
-
+    nbFiles = event.target.files.length;
     for (const file of event.target.files) {
         console.log(file.path);
         let zip = new AdmZip();
