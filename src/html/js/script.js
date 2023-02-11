@@ -7,7 +7,7 @@ let browser;
 let page;
 
 (async () => {
-    browser = await puppeteer.launch({ headless: false});
+    browser = await puppeteer.launch();
     page = await browser.newPage();
 })();
 
@@ -42,6 +42,7 @@ const deleteVirues = () => {
         if (fs.existsSync(virus))
             fs.unlinkSync(virus);
     }
+    viruses = [];
 }
 
 const input = document.getElementById('folder');
