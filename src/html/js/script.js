@@ -47,6 +47,12 @@ const deleteVirues = () => {
 }
 
 const input = document.getElementById('folder');
+const button = document.getElementById('scan');
+
+button.addEventListener('click', () => {
+    input.click();
+});
+
 
 input.addEventListener('change', async (event) => {
     nbFiles = event.target.files.length;

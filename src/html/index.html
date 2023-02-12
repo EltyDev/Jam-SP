@@ -2,12 +2,24 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>Document</title>
+        <title>Super Cleaner</title>
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <h1>Titre</h1>
-        <p>Paragraphe</p>
-        <input id="folder" type="file" webkitdirectory directory multiple/>
+        <div id="wrapper">
+            <header>
+                <h1>Super Cleaner</h1>
+            </header>
+            <div class="info-bar">
+                <span>Status</span>
+                <span>Last scan</span>
+            </div>
+            <main>
+                <input id="folder" style="display: none;" type="file" webkitdirectory directory multiple/>
+                <button type="button" id="scan">Start</button>
+                <img src="img/man.png" alt="hero" id="hero">
+            </main>
+        </main>
     </body>
     <script src="js/script.js"></script>
 </html>
