@@ -126,13 +126,12 @@ main {
 
 #bubble {  
     position: absolute;
-    width: 596px;
+    width: 579px;
     height: 495px;
-    left: 1635px;
-    top: 258px;
-
+    left: 1100px;
+    top: 200px;
     background: url(../img/bubble.png);
-    transform: matrix(-1, 0, 0, 1, 0, 0);
+    border: 0;
 }
 
 #text_bubble {

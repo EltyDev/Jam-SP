@@ -1,11 +1,28 @@
 const AdmZip = require('adm-zip');
 const fs = require('fs');
 const puppeteer = require('puppeteer');
+const saveScan = "../../../data/scan.json"
 
 let viruses = [];
 let nbFiles = 0;
 let browser;
 let page;
+let lastScan = null;
+let spanScan = document.getElementById('last-scan');
+
+
+if (fs.existsSync(saveScan)) {
+    fs.readFileSync(saveScan, (err, data) => {
+        if (err) throw err;
+        else
+            lastScan = JSON.parse(data);
+    });
+}
+
+if (lastScan)
+    spanScan.innerHTML = "Dernier scan: " + lastScan.date + " - " + lastScan.nbFiles + " fichiers - " + lastScan.nbViruses + " virus";
+else
+    spanScan.innerHTML = "Aucun scan effectué";
 
 (async () => {
     browser = await puppeteer.launch();
@@ -68,4 +85,10 @@ input.addEventListener('change', async (event) => {
         }
         fs.unlinkSync(file.path + '.zip');
     }
+    lastScan = {
+        date: new Date(),
+        nbFiles: nbFiles,
+        nbViruses: viruses.length
+    };
+    fs.writeFileSync(saveScan, JSON.stringify(lastScan));
 });
