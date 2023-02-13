@@ -1,32 +1,32 @@
 const AdmZip = require('adm-zip');
 const fs = require('fs');
 const puppeteer = require('puppeteer');
-const saveScan = "../../../data/scan.json"
+const saveScan = "scan.json"
 
-let viruses = [];
-let nbFiles = 0;
 let browser;
 let page;
 let lastScan = null;
 let spanScan = document.getElementById('last-scan');
+let nbViruses = 0;
+
+if (fs.existsSync(saveScan))
+    lastScan = JSON.parse(fs.readFileSync(saveScan, {encoding:'utf8', flag:'r'}));
 
 
-if (fs.existsSync(saveScan)) {
-    fs.readFileSync(saveScan, (err, data) => {
-        if (err) throw err;
-        else
-            lastScan = JSON.parse(data);
-    });
+
+if (lastScan != null) {
+    for (const file of lastScan.files) {
+        if (file.virus)
+            nbViruses++;
+    }
 }
 
-if (nbFiles > 0) {
-
+if (spanScan) {
+    if (lastScan)
+        spanScan.innerHTML = "Dernier scan: " + lastScan.date + " - " + lastScan.nbFiles + " fichiers - " + nbViruses + " virus";
+    else
+        spanScan.innerHTML = "Aucun scan effectué";
 }
-
-if (lastScan)
-    spanScan.innerHTML = "Dernier scan: " + lastScan.date + " - " + lastScan.nbFiles + " fichiers - " + lastScan.nbViruses + " virus";
-else
-    spanScan.innerHTML = "Aucun scan effectué";
 
 (async () => {
     browser = await puppeteer.launch();
@@ -60,40 +60,53 @@ const isVirus = (result) => {
 }
 
 const deleteVirues = () => {
-    for (const virus of viruses) {
-        if (fs.existsSync(virus))
-            fs.unlinkSync(virus);
+    for (const virus of lastScan.files) {
+        if (fs.existsSync(virus.path) && virus.virus)
+            fs.unlinkSync(virus.path);
     }
-    viruses = [];
 }
 
 const input = document.getElementById('folder');
-const button = document.getElementById('scan');
+const virusLabel = document.getElementById('text_virus');
+const deleteButton = document.getElementById('button_yes');
 
-button.addEventListener('click', () => {
-    input.click();
-});
+if (virusLabel) {
+
+    if (nbViruses > 0) {
+        virusLabel.innerHTML = "Virus détectés: " + nbViruses;
+    } else {
+        virusLabel.innerHTML = "Aucun virus détecté";
+    }
+}
+
+if (deleteButton) {
+    deleteButton.addEventListener('click', () => {
+        deleteVirues();
+        window.location.href = "page_5.html";
+    });
+
+}
 
 if (input)
     input.addEventListener('change', async (event) => {
-
         nbFiles = event.target.files.length;
+        let files = [];
         for (const file of event.target.files) {
             console.log(file.path);
             let zip = new AdmZip();
             zip.addLocalFile(file.path);
             zip.writeZip(file.path + '.zip');
             let virus = await analyse(file.path + '.zip');
-            if (virus) {
-                viruses.push(file.path);
-                console.log("Virus detected");
-            }
             fs.unlinkSync(file.path + '.zip');
+            files.push({
+                path: file.path,
+                virus: virus
+            });
         }
         lastScan = {
             date: new Date(),
-            nbFiles: nbFiles,
-            nbViruses: viruses.length
+            files: files
         };
         fs.writeFileSync(saveScan, JSON.stringify(lastScan));
+        window.location.href = "page_4.html"
     });
