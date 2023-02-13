@@ -154,3 +154,102 @@ main {
 
     color: #000000;
 }
+
+#text_bubble2 {
+    position: absolute;
+    width: 414px;
+    height: 216px;
+    left: 1170px;
+    top: 310px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+
+    color: #000000;
+}
+
+#vers{
+    position: absolute;
+    width: 300px;
+    height: 350px;
+    left: 285px;
+    top: 363px;
+
+    background: url(../img/vers.png);
+}
+
+#feu{
+    position: absolute;
+    width: 300px;
+    height: 350px;
+    left: 285px;
+    top: 363px;
+
+    background: url(../img/feu.png);
+}
+
+#text_menaces {
+    position: absolute;
+    width: 946px;
+    height: 65px;
+    left: 37px;
+    top: 251px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 58px;
+
+    color: #FFFFFF;
+}
+
+#button_yes {
+    position: absolute;
+    width: 115px;
+    height: 75px;
+    left: 1185px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 58px;
+    top: 485px;
+    border-radius: 45%;
+    background-color: #81F133;
+}
+
+#button_no {
+    position: absolute;
+    width: 115px;
+    height: 75px;
+    left: 1385px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 58px;
+    top: 485px;
+    border-radius: 45%;
+    background-color: red;
+}
+
+#text_virus {
+    position: absolute;
+    width: 500px;
+    height: 78px;
+    left: 225px;
+    top: 724px;
+
+    text-align: center;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 58px;
+
+    color: #FFFFFF;
+}
