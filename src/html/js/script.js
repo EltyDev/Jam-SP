@@ -19,6 +19,10 @@ if (fs.existsSync(saveScan)) {
     });
 }
 
+if (nbFiles > 0) {
+
+}
+
 if (lastScan)
     spanScan.innerHTML = "Dernier scan: " + lastScan.date + " - " + lastScan.nbFiles + " fichiers - " + lastScan.nbViruses + " virus";
 else
