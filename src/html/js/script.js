@@ -70,25 +70,26 @@ button.addEventListener('click', () => {
     input.click();
 });
 
+if (input)
+    input.addEventListener('change', async (event) => {
 
-input.addEventListener('change', async (event) => {
-    nbFiles = event.target.files.length;
-    for (const file of event.target.files) {
-        console.log(file.path);
-        let zip = new AdmZip();
-        zip.addLocalFile(file.path);
-        zip.writeZip(file.path + '.zip');
-        let virus = await analyse(file.path + '.zip');
-        if (virus) {
-            viruses.push(file.path);
-            console.log("Virus detected");
+        nbFiles = event.target.files.length;
+        for (const file of event.target.files) {
+            console.log(file.path);
+            let zip = new AdmZip();
+            zip.addLocalFile(file.path);
+            zip.writeZip(file.path + '.zip');
+            let virus = await analyse(file.path + '.zip');
+            if (virus) {
+                viruses.push(file.path);
+                console.log("Virus detected");
+            }
+            fs.unlinkSync(file.path + '.zip');
         }
-        fs.unlinkSync(file.path + '.zip');
-    }
-    lastScan = {
-        date: new Date(),
-        nbFiles: nbFiles,
-        nbViruses: viruses.length
-    };
-    fs.writeFileSync(saveScan, JSON.stringify(lastScan));
-});
+        lastScan = {
+            date: new Date(),
+            nbFiles: nbFiles,
+            nbViruses: viruses.length
+        };
+        fs.writeFileSync(saveScan, JSON.stringify(lastScan));
+    });
