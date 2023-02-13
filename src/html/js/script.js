@@ -73,9 +73,9 @@ const deleteButton = document.getElementById('button_yes');
 if (virusLabel) {
 
     if (nbViruses > 0) {
-        virusLabel.innerHTML = "Virus détectés: " + nbViruses;
+        virusLabel.innerHTML = "Chauve-souvirus détectés: " + nbViruses;
     } else {
-        virusLabel.innerHTML = "Aucun virus détecté";
+        virusLabel.innerHTML = "Aucun chauve-souvirus détecté";
     }
 }
 

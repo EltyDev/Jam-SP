@@ -174,11 +174,11 @@ main {
 #vers{
     position: absolute;
     width: 300px;
-    height: 350px;
+    height: 225px;
     left: 285px;
-    top: 363px;
+    top: 393px;
 
-    background: url(../img/vers.png);
+    background: url(../img/bat.png);
 }
 
 #feu{
